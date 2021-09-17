@@ -5,8 +5,10 @@ import './App.css';
 
 function App() {
   return (
-    // <ColorArc />
-    <BarChart />
+    <div>
+      <ColorArc />
+      <BarChart />
+    </div>
   );
 }
 

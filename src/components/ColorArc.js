@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { ReactDOM } from 'react';
 import { csv, arc, pie } from 'd3';
 
-const corshead = "https://observable-cors.glitch.me/"
-const dataUrl = corshead + "https://gist.githubusercontent.com/curran/b236990081a24761f7000567094914e0/raw/acd2b8cecfe51c520622fbaf407ee88b8796bfc6/cssNamedColors.csv";
+const dataUrl = "https://gist.githubusercontent.com/curran/b236990081a24761f7000567094914e0/raw/acd2b8cecfe51c520622fbaf407ee88b8796bfc6/cssNamedColors.csv";
 
 const width = 960;
 const height = 500;

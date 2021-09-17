@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { ReactDOM } from 'react';
 import { csv, max, scaleBand, scaleLinear } from 'd3';
 
-const corshead = "https://observable-cors.glitch.me/"
-const dataUrl = corshead + "https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv";
+const dataUrl = "https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv";
 
 const width = 960;
 const height = 500;
