@@ -1,5 +1,5 @@
 import React from 'react';
-import { max, scaleBand, scaleLinear } from 'd3';
+import { max, scaleBand, scaleLinear, format } from 'd3';
 import { useData } from "./useData";
 import { LeftAxis } from './LeftAxis';
 import { BottomAxis } from './BottomAxis';
@@ -7,10 +7,13 @@ import { Marks } from './Marks';
 
 const width = 960;
 const height = 500;
-const margin = { top: 20, right: 20, bottom: 20, left: 270 };
+const margin = { top: 20, right: 20, bottom: 50, left: 270 };
 
 const yValue = d => d.Country;
 const xValue = d => d.Population;
+
+const xLabelOffset = 35;
+const xAxisTickFormat = tickValue => format(".2s")(tickValue).replace('G','B');
 
 const BarChart = () => {
   const bar = useData();
@@ -35,9 +38,26 @@ const BarChart = () => {
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left},${margin.top})`}>
-        <BottomAxis xScale={xScale} innerHeight={innerHeight} />
+        <BottomAxis 
+          xScale={xScale} 
+          innerHeight={innerHeight} 
+          tickFormat={xAxisTickFormat}
+        />
         <LeftAxis yScale={yScale} />
-        <Marks data={bar} xScale={xScale} yScale={yScale} xValue={xValue} yValue={yValue}/>
+        <text 
+          className="xaxis-label" 
+          x={innerWidth / 2 } 
+          y={innerHeight + xLabelOffset} 
+          textAnchor='middle'
+        >Population</text>
+        <Marks 
+          data={bar} 
+          xScale={xScale} 
+          yScale={yScale} 
+          xValue={xValue} 
+          yValue={yValue}
+          tooltipFormat={xAxisTickFormat}
+        />
       </g>
     </svg>
   )
