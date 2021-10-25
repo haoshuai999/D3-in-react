@@ -2,7 +2,7 @@ import React from 'react';
 import { extent, scaleBand, scaleLinear, format } from 'd3';
 import { useIrisData } from "./useIrisData";
 import { NewLeftAxis } from './NewLeftAxis';
-import { BottomAxis } from '../BarChart/BottomAxis';
+import { NewBottomAxis } from './NewBottomAxis';
 import { Circles } from './Circles';
 
 const width = 960;
@@ -33,7 +33,8 @@ const ScatterChart = () => {
 
   const xScale = scaleLinear()
     .domain(extent(iris, xValue))
-    .range([0, innerWidth]);
+    .range([0, innerWidth])
+    .nice();
 
   const yScale = scaleLinear()
     .domain(extent(iris, yValue))
@@ -42,10 +43,11 @@ const ScatterChart = () => {
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left},${margin.top})`}>
-        <BottomAxis 
+        <NewBottomAxis 
           xScale={xScale} 
           innerHeight={innerHeight} 
           tickFormat={xAxisTickFormat}
+          tickOffset={5}
         />
         <text 
           className="axis-label" 
@@ -53,7 +55,11 @@ const ScatterChart = () => {
           transform={`translate(${-yLabelOffset}, ${innerHeight / 2}) rotate(-90)`}
         >{yAxisLabel}
         </text>
-        <NewLeftAxis yScale={yScale} innerWidth={innerWidth}/>
+        <NewLeftAxis 
+          yScale={yScale} 
+          innerWidth={innerWidth}
+          tickOffset={5}
+        />
         <text 
           className="axis-label" 
           x={innerWidth / 2 } 
@@ -67,6 +73,7 @@ const ScatterChart = () => {
           xValue={xValue} 
           yValue={yValue}
           tooltipFormat={xAxisTickFormat}
+          radius={7}
         />
       </g>
     </svg>
