@@ -1,6 +1,7 @@
 import logo from './logo.svg';
-import ColorArc from './components/ColorArc';
-import BarChart from './components/BarChart';
+import ColorArc from './components/ColorArc/ColorArc';
+import BarChart from './components/BarChart/BarChart';
+import Iris from './components/ScatterChart/Iris'
 import './App.css';
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <div>
       <ColorArc />
       <BarChart />
+      <Iris />
     </div>
   );
 }

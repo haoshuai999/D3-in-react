@@ -32,8 +32,9 @@ const ColorArc = () => {
       <g transform={`translate(${centerX},${centerY})`}>
         {
           coloredPie(color)
-          .map(d => (
-            <path 
+          .map((d, i) => (
+            <path
+              key= {i}
               fill= {d.data['RGB hex value']}
               d={pathArc(d)}
             />
