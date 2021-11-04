@@ -3,7 +3,7 @@ import { extent, scaleTime, scaleLinear, timeFormat } from 'd3';
 import { useData } from "./useData";
 import { LeftAxis } from './LeftAxis';
 import { BottomAxis } from './BottomAxis';
-import { Circles } from './Circles';
+import { Lines } from './Lines';
 
 const width = 960;
 const height = 500;
@@ -48,7 +48,7 @@ const LineChart = () => {
           xScale={xScale} 
           innerHeight={innerHeight} 
           tickFormat={xAxisTickFormat}
-          tickOffset={5}
+          tickOffset={7}
         />
         <text 
           className="axis-label" 
@@ -59,7 +59,7 @@ const LineChart = () => {
         <LeftAxis 
           yScale={yScale} 
           innerWidth={innerWidth}
-          tickOffset={5}
+          tickOffset={7}
         />
         <text 
           className="axis-label" 
@@ -67,14 +67,14 @@ const LineChart = () => {
           y={innerHeight + xLabelOffset} 
           textAnchor='middle'
         >{xAxisLabel}</text>
-        <Circles 
+        <Lines 
           data={data} 
           xScale={xScale} 
           yScale={yScale} 
           xValue={xValue} 
           yValue={yValue}
           tooltipFormat={xAxisTickFormat}
-          radius={7}
+          radius={2}
         />
       </g>
     </svg>

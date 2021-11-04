@@ -24,6 +24,17 @@ code {
   fill: red;
 }
 
+.marks circle {
+  fill: red;
+}
+
+.marks path {
+  stroke: red;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
 .axis-label {
   font-size: 1.2em;
   fill: rgb(87, 87, 87);
