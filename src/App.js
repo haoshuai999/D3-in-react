@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import ColorArc from './components/ColorArc/ColorArc';
 import BarChart from './components/BarChart/BarChart';
-import Iris from './components/ScatterChart/Iris'
+import ScatterChart from './components/ScatterChart/Iris';
+import LineChart from './components/LineChart/Temparature';
 import './App.css';
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
     <div>
       <ColorArc />
       <BarChart />
-      <Iris />
+      <ScatterChart />
+      <LineChart />
     </div>
   );
 }
