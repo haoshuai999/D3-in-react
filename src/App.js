@@ -4,6 +4,7 @@ import BarChart from './components/BarChart/BarChart';
 import ScatterChart from './components/ScatterChart/Iris';
 import LineChart from './components/LineChart/Temparature';
 import './App.css';
+import WorldMap from './components/WorldMap/WorldMap';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <BarChart />
       <ScatterChart />
       <LineChart />
+      <WorldMap />
     </div>
   );
 }
