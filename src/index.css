@@ -35,6 +35,25 @@ code {
   stroke-linecap: round;
 }
 
+.marksmap .land {
+  fill: lightblue;
+  stroke: gray;
+}
+
+.marksmap .sphere {
+  fill: lightgray;
+}
+
+.marksmap .interiors {
+  fill: none;
+  stroke: rgb(175, 175, 175);
+}
+
+.marksmap .graticules {
+  fill: none;
+  stroke: rgb(155, 155, 155);
+}
+
 .axis-label {
   font-size: 1.2em;
   fill: rgb(87, 87, 87);
