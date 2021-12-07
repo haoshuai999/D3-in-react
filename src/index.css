@@ -58,3 +58,11 @@ code {
   font-size: 1.2em;
   fill: rgb(87, 87, 87);
 }
+
+label, select {
+  font-size: 2em;
+}
+
+select option {
+  font-size: 0.5rem;
+}
