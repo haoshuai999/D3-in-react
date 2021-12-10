@@ -1,8 +1,8 @@
-const ScatterMenu = ({options, id, selectedValue, onSelectedValueChange}) => {
+export const ScatterMenu = ({options, id, label, selectedValue, onSelectedValueChange}) => {
 
     return (
-        <div>
-            <label for={id}>Choose a pet:</label>
+        <>
+            <label for={id}>{label}:</label>
             <select id={id} onChange={
                 event => onSelectedValueChange(event.target.value)
             }>
@@ -11,7 +11,7 @@ const ScatterMenu = ({options, id, selectedValue, onSelectedValueChange}) => {
                 ))
                 }
             </select>
-        </div>
+        </>
     )
 }
 
