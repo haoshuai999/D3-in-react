@@ -2,7 +2,6 @@ export const ScatterMenu = ({options, id, label, selectedValue, onSelectedValueC
 
     return (
         <>
-            <label for={id}>{label}:</label>
             <select id={id} onChange={
                 event => onSelectedValueChange(event.target.value)
             }>

@@ -59,10 +59,31 @@ code {
   fill: rgb(87, 87, 87);
 }
 
-label, select {
+/* label, select {
   font-size: 2em;
 }
 
 select option {
   font-size: 0.5rem;
+} */
+
+.Dropdown-root {
+  width: 300px;
+  display: inline-block;
+}
+
+.Dropdown-menu {
+  max-height: 300px !important;
+}
+
+.dropdown-label {
+  margin-left: 35px;
+  font-size: 2.2em;
+  color: rgb(87, 87, 87);
+}
+
+.dropdown-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
