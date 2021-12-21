@@ -6,12 +6,12 @@ import { useIrisData } from "./useIrisData";
 import { NewLeftAxis } from './NewLeftAxis';
 import { NewBottomAxis } from './NewBottomAxis';
 import { Circles } from './Circles';
-import { isCompositeComponent } from 'react-dom/cjs/react-dom-test-utils.production.min';
+import { Legend } from './Legend';
 
 const width = 960;
 const menuHeight = 50;
 const height = 500 - menuHeight;
-const margin = { top: 20, right: 20, bottom: 50, left: 100 };
+const margin = { top: 20, right: 120, bottom: 50, left: 100 };
 
 const options = [
   { value: "sepal_length", label: "Sepal Length" }, 
@@ -46,6 +46,9 @@ const ScatterChart = () => {
   const yAxisLabel = getLabel(yAttr);
 
   const colorValue = d => d.species;
+  const legendLabel = "Species"
+
+  const circleRadius = 7
 
   if (!iris) {
     return <pre>Loading...</pre>
@@ -112,6 +115,22 @@ const ScatterChart = () => {
               y={innerHeight + xLabelOffset} 
               textAnchor='middle'
             >{xAxisLabel}</text>
+            <g transform={`translate(${innerWidth + 30}, 30)`}>
+              <text
+                x = {30}
+                y = {-20}
+                className='axis-label'
+                textAnchor='middle'
+              >
+                {legendLabel}
+              </text>
+              <Legend 
+                colorScale={colorScale}
+                legendSpacing= {30}
+                legendSize = {circleRadius}
+                legendOffset= {10}
+              />
+            </g>
             <Circles 
               data={iris} 
               xScale={xScale} 
@@ -121,7 +140,7 @@ const ScatterChart = () => {
               colorScale={colorScale}
               colorValue={colorValue}
               tooltipFormat={xAxisTickFormat}
-              radius={7}
+              radius={circleRadius}
             />
         </g>
         </svg>
