@@ -18,6 +18,7 @@ code {
 
 .tick text {
   fill: rgb(87, 87, 87);
+  cursor: pointer;
 }
 
 .marks circle {

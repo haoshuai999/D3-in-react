@@ -12,6 +12,7 @@ const width = 960;
 const menuHeight = 50;
 const height = 500 - menuHeight;
 const margin = { top: 20, right: 120, bottom: 50, left: 100 };
+const opacity = 0.2
 
 const options = [
   { value: "sepal_length", label: "Sepal Length" }, 
@@ -34,6 +35,7 @@ const getLabel = value => {
 const ScatterChart = () => {
 
   const iris = useIrisData(dataUrl);
+  const [hoveredValue, setHoveredValue] = useState(null);
   
   const initX = 'petal_length';
   const [xAttr, setXAttr] = useState(initX);
@@ -53,6 +55,8 @@ const ScatterChart = () => {
   if (!iris) {
     return <pre>Loading...</pre>
   }
+
+  const filteredIris = iris.filter(d => hoveredValue === colorValue(d))
 
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
@@ -129,10 +133,27 @@ const ScatterChart = () => {
                 legendSpacing= {30}
                 legendSize = {circleRadius}
                 legendOffset= {10}
+                onHover={setHoveredValue}
+                onLeave={setHoveredValue}
+                hoveredValue={hoveredValue}
+                opacity={opacity}
+              />
+            </g>
+            <g opacity={hoveredValue ? opacity : 1}>
+              <Circles 
+                data={iris} 
+                xScale={xScale} 
+                yScale={yScale} 
+                xValue={xValue} 
+                yValue={yValue}
+                colorScale={colorScale}
+                colorValue={colorValue}
+                tooltipFormat={xAxisTickFormat}
+                radius={circleRadius}
               />
             </g>
             <Circles 
-              data={iris} 
+              data={filteredIris} 
               xScale={xScale} 
               yScale={yScale} 
               xValue={xValue} 
