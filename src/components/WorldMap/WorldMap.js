@@ -1,4 +1,5 @@
 import React from 'react';
+import { scaleSqrt, max } from 'd3';
 import { useCity } from "./useCity";
 import { useLand } from "./useLand";
 import { Marks } from './Marks';
@@ -14,11 +15,17 @@ const cityUrl = "https://gist.githubusercontent.com/curran/13d30e855d48cdd6f22ac
 const WorldMap = () => {
   const lands = useLand(landUrl);
   const cities = useCity(cityUrl);
-  console.log(cities)
 
   if (!lands || !cities) {
     return <pre>Loading...</pre>
   }
+
+  const sizeValue = d => d.population;
+  const maxRadius = 10;
+
+  const sizeScale = scaleSqrt()
+        .domain([0, max(cities, sizeValue)])
+        .range([0, maxRadius]);
 
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
@@ -28,6 +35,8 @@ const WorldMap = () => {
       <Marks 
         lands={lands} 
         cities={cities}
+        sizeScale={sizeScale}
+        sizeValue={sizeValue}
       />
     </svg>
   )
