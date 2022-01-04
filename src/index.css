@@ -51,6 +51,11 @@ code {
   stroke: rgb(155, 155, 155);
 }
 
+.cities {
+  fill: red;
+  opacity: 0.3;
+}
+
 .axis-label {
   font-size: 1.2em;
   fill: rgb(87, 87, 87);

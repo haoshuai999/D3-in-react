@@ -1,19 +1,22 @@
 import React from 'react';
-// import { } from 'd3';
-import { useData } from "./useData";
+import { useCity } from "./useCity";
+import { useLand } from "./useLand";
 import { Marks } from './Marks';
 
 const width = 960;
 const height = 500;
 const margin = { top: 20, right: 20, bottom: 50, left: 100 };
 
-const dataUrl = "https://unpkg.com/world-atlas@2.0.2/countries-50m.json"
+const landUrl = "https://unpkg.com/world-atlas@2.0.2/countries-50m.json";
+const cityUrl = "https://gist.githubusercontent.com/curran/13d30e855d48cdd6f22acdf0afe27286/raw/0635f14817ec634833bb904a47594cc2f5f9dbf8/worldcities_clean.csv"
 
 
 const WorldMap = () => {
-  const data = useData(dataUrl);
+  const lands = useLand(landUrl);
+  const cities = useCity(cityUrl);
+  console.log(cities)
 
-  if (!data) {
+  if (!lands || !cities) {
     return <pre>Loading...</pre>
   }
 
@@ -23,7 +26,8 @@ const WorldMap = () => {
   return (
     <svg width={width} height={height}>
       <Marks 
-        data={data} 
+        lands={lands} 
+        cities={cities}
       />
     </svg>
   )

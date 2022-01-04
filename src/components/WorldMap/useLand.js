@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import { json } from 'd3';
 import { feature, mesh } from 'topojson-client';
 
-export const useData = (dataUrl) => {
+export const useLand = (dataUrl) => {
     const [data, setData] = useState(null);
 
     useEffect(() => {
