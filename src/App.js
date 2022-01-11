@@ -4,6 +4,7 @@ import BarChart from './components/BarChart/BarChart';
 import ScatterChart from './components/ScatterChart/Iris';
 import Scatter from './components/ScatterMenu/Scatter';
 import LineChart from './components/LineChart/Temparature';
+import Migrants from './components/Migrants/Migrants';
 import './App.css';
 import WorldMap from './components/WorldMap/WorldMap';
 import { useState } from 'react';
@@ -12,6 +13,11 @@ function App() {
 
   return (
     <div className="container">
+      <div className="row">
+        <div className="col-12 text-center">
+          <Migrants />
+        </div>
+      </div>
       <div className="row">
         <div className="col-12 text-center">
           <Scatter />
