@@ -25,6 +25,10 @@ code {
   fill: red;
 }
 
+.marks-rect {
+  fill: red;
+}
+
 .marks path {
   stroke: red;
   stroke-width: 2;
