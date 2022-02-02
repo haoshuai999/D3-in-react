@@ -5,13 +5,14 @@ import { LeftAxis } from './LeftAxis';
 import { BottomAxis } from './BottomAxis';
 import { Bins } from './Bins';
 
-const width = 960;
-const height = 500;
-const margin = { top: 20, right: 50, bottom: 50, left: 100 };
+const margin = { top: 10, right: 30, bottom: 20, left: 50 };
+
+const xLabelOffset = 35;
+const yLabelOffset = 40;
 
 const dataUrl = "https://gist.githubusercontent.com/curran/a9656d711a8ad31d812b8f9963ac441c/raw/c22144062566de911ba32509613c84af2a99e8e2/MissingMigrants-Global-2019-10-08T09-47-14-subset.csv";
 
-const LineChart = () => {
+const Migrants = ({width, height}) => {
   const data = useData(dataUrl);
 
   if (!data) {
@@ -24,8 +25,6 @@ const LineChart = () => {
   const yValue = d => d["Total Dead and Missing"];
   const yAxisLabel = 'Total Dead and Missing';
 
-  const xLabelOffset = 35;
-  const yLabelOffset = 55;
   const xAxisTickFormat = timeFormat("%m/%d/%Y");
 
   const innerWidth = width - margin.left - margin.right;
@@ -48,6 +47,7 @@ const LineChart = () => {
       x1: array.x1
     }))
 
+  console.log(binnedData)
 
   const yScale = scaleLinear()
     .domain([0, max(binnedData, d => d.y)])
@@ -92,4 +92,4 @@ const LineChart = () => {
   )
 }
 
-export default LineChart;
+export default Migrants;

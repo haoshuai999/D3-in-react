@@ -17,6 +17,7 @@ code {
 }
 
 .tick text {
+  font-size: 0.7em;
   fill: rgb(87, 87, 87);
   cursor: pointer;
 }
@@ -66,7 +67,7 @@ code {
 }
 
 .axis-label {
-  font-size: 1.2em;
+  font-size: 0.7em;
   fill: rgb(87, 87, 87);
 }
 

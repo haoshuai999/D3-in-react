@@ -10,18 +10,18 @@ import './App.css';
 import WorldMap from './components/WorldMap/WorldMap';
 import { useState } from 'react';
 
+const width = 960;
+const height = 500;
+const histogramSize = 0.3
+
 function App() {
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-12 text-center">
-          <Migrants />
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-12 text-center">
-          <MigrantsMap />
+          <MigrantsMap width={width} height={height} />
+          <Migrants width={width} height={height * histogramSize}/>
         </div>
       </div>
       <div className="row">
