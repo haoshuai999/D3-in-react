@@ -49,10 +49,9 @@ const Migrants = ({ data, width, height, setBrushExtent, xValue }) => {
     const brush = brushX().extent([[0,0], [innerWidth, innerHeight]]);
     
     brush(select(brushRef.current));
-    brush.on("brush", (event) => {
-      setBrushExtent(event.selection.map(xScale.invert));
+    brush.on("brush end", (event) => {
+      setBrushExtent(event.selection && event.selection.map(xScale.invert));
     });
-    console.log(select(brushRef.current))
   }, [innerWidth, innerHeight]);
 
   return (
