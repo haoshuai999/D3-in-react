@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useMemo } from 'react';
 import { extent, scaleTime, scaleLinear, timeFormat, bin, timeMonths, sum, max, brushX, select } from 'd3';
 import { LeftAxis } from './LeftAxis';
 import { BottomAxis } from './BottomAxis';
@@ -9,39 +9,46 @@ const margin = { top: 10, right: 30, bottom: 20, left: 50 };
 const xLabelOffset = 35;
 const yLabelOffset = 40;
 
+const xAxisLabel = 'Time';
+const xAxisTickFormat = timeFormat("%m/%d/%Y");
+
+const yValue = d => d["Total Dead and Missing"];
+const yAxisLabel = 'Total Dead and Missing';
+
 const Migrants = ({ data, width, height, setBrushExtent, xValue }) => {
 
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
-  const xAxisLabel = 'Time';
 
-  const yValue = d => d["Total Dead and Missing"];
-  const yAxisLabel = 'Total Dead and Missing';
+  const xScale = useMemo(
+    () => scaleTime()
+        .domain(extent(data, xValue))
+        .range([0, innerWidth])
+        .nice(), 
+    [data, xValue, innerWidth]
+  )
 
-  const xAxisTickFormat = timeFormat("%m/%d/%Y");
+  const binnedData = useMemo(() => {
+    const [start, stop] = xScale.domain()
+    return bin()
+      .value(xValue)
+      .domain(xScale.domain())
+      .thresholds(timeMonths(start, stop))(data)
+      .map(array => ({
+        y: sum(array, yValue),
+        x0: array.x0,
+        x1: array.x1
+      }))
+    },
+    [xValue, yValue, xScale, data])
 
-  const xScale = scaleTime()
-    .domain(extent(data, xValue))
-    .range([0, innerWidth])
-    .nice();
-
-  const [start, stop] = xScale.domain()
-
-  const binnedData = bin()
-    .value(xValue)
-    .domain(xScale.domain())
-    .thresholds(timeMonths(start, stop))(data)
-    .map(array => ({
-      y: sum(array, yValue),
-      x0: array.x0,
-      x1: array.x1
-    }));
-
-  const yScale = scaleLinear()
+  const yScale = useMemo(() => scaleLinear()
     .domain([0, max(binnedData, d => d.y)])
     .range([innerHeight, 0])
-    .nice();
+    .nice(),
+    [binnedData, innerHeight]
+  );
   
   const brushRef = useRef();
 

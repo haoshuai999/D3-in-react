@@ -3,10 +3,52 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import WorldMap from './components/WorldMap/WorldMap';
+import ColorArc from './components/ColorArc/ColorArc';
+import BarChart from './components/BarChart/BarChart';
+import ScatterChart from './components/ScatterChart/Iris';
+import Scatter from './components/ScatterMenu/Scatter';
+import LineChart from './components/LineChart/Temparature';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div className="container">
+      <div className="row">
+        <div className="col-12 text-center">
+          <App />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 text-center">
+          <Scatter />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 text-center">
+          <ColorArc />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 text-center">
+          <BarChart />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 text-center">
+          <ScatterChart />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 text-center">
+          <LineChart />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 text-center">
+          <WorldMap />
+        </div>
+      </div> 
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
