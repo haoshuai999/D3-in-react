@@ -20,7 +20,6 @@ function App() {
   const lands = useLand(landUrl);
 
   if (!data || !lands) {
-    console.log("called")
     return <pre>Loading...</pre>
   }
 

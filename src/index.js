@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import WorldMap from './components/WorldMap/WorldMap';
+import HIVMap from './components/HIVMap/HIVMap';
 import ColorArc from './components/ColorArc/ColorArc';
 import BarChart from './components/BarChart/BarChart';
 import ScatterChart from './components/ScatterChart/Iris';
@@ -46,6 +47,11 @@ ReactDOM.render(
       <div className="row">
         <div className="col-12 text-center">
           <WorldMap />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12 text-center">
+          <HIVMap />
         </div>
       </div> 
     </div>

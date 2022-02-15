@@ -22,6 +22,10 @@ code {
   cursor: pointer;
 }
 
+.mark {
+  fill: red;
+}
+
 .marks circle {
   fill: red;
 }
@@ -38,12 +42,12 @@ code {
 }
 
 .marksmap .land {
-  fill: lightblue;
+  fill: lightgray;
   stroke: gray;
 }
 
 .marksmap .sphere {
-  fill: lightgray;
+  fill: lightblue;
 }
 
 .marksmap .interiors {
