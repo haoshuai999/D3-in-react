@@ -35,8 +35,6 @@ const WorldMap = () => {
     countryMap.set(numericCode, d)
   });
 
-  //console.log(countryMap)
-
   const colorValue = d => d.aids;
 
   const colorScale = scaleSequential(interpolateYlOrRd)
