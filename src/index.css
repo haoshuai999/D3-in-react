@@ -103,3 +103,12 @@ select option {
   justify-content: center;
   align-items: center;
 }
+
+.marker {
+  stroke: black;
+  stroke-width: 2px;
+}
+
+.marker-text {
+  text-anchor: end;
+}
