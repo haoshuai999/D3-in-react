@@ -17,7 +17,7 @@ code {
 }
 
 .tick text {
-  font-size: 0.7em;
+  font-size: 1.3em;
   fill: rgb(87, 87, 87);
   cursor: pointer;
 }
