@@ -17,7 +17,7 @@ code {
 }
 
 .tick text {
-  font-size: 1.3em;
+  font-size: 12px;
   fill: rgb(87, 87, 87);
   cursor: pointer;
 }
@@ -35,7 +35,6 @@ code {
 }
 
 .marks path {
-  stroke: red;
   stroke-width: 2;
   stroke-linejoin: round;
   stroke-linecap: round;
@@ -111,4 +110,8 @@ select option {
 
 .marker-text {
   text-anchor: end;
+}
+
+.title {
+  font-size: 20px;
 }

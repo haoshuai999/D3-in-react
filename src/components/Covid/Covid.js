@@ -1,5 +1,5 @@
 import React from 'react';
-import { scaleTime, scaleLinear, extent, max, timeFormat } from 'd3';
+import { scaleTime, scaleLog, extent, max, timeFormat } from 'd3';
 import { useData } from "./useData";
 import { Marks } from './Marks';
 import { LeftAxis } from './LeftAxis';
@@ -8,7 +8,7 @@ import { YMarkerline } from './YMarkerline';
 
 const width = 960;
 const height = 700;
-const margin = { top: 20, right: 20, bottom: 50, left: 90 };
+const margin = { top: 40, right: 20, bottom: 50, left: 70 };
 
 const dataUrl = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv";
 
@@ -20,7 +20,9 @@ const xAxisLabel = "Date";
 const xLabelOffset = 35;
 
 const yAxisLabel = "Total Number of COVID Deaths";
-const yLabelOffset = 65;
+const yLabelOffset = 35;
+
+const epsilon = 1
 
 const Covid = () => {
   const data = useData(dataUrl);
@@ -28,24 +30,31 @@ const Covid = () => {
   if (!data) {
     return <pre>Loading...</pre>
   }
+  const allData = data.reduce((accu, timeSeries) => accu.concat(timeSeries), []);
 
-  const xValue = d => d.date
+  const xValue = d => d.date;
 
-  const yValue = d => d.deathTotal
+  const yValue = d => d.deathTotal;
 
   const xScale = scaleTime()
-    .domain(extent(data, d => d.date))
+    .domain(extent(allData, d => d.date))
     .range([0, innerWidth])
 
-  const yScale = scaleLinear()
-    .domain([0, max(data, d => d.deathTotal)])
+  const yScale = scaleLog()
+    .domain([epsilon, max(allData, d => d.deathTotal)])
     .range([innerHeight, 0])
 
-  console.log(yScale.domain())
 
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left},${margin.top})`}>
+        <text 
+          className='title'
+          transform={`translate(${innerWidth / 2}, -10)`}
+          textAnchor='middle'
+        >
+          Global Coronavirus Deaths Over Time By Country
+        </text>
         <BottomAxis
           xScale={xScale}
           innerHeight={innerHeight}
@@ -80,6 +89,7 @@ const Covid = () => {
           yScale={yScale}
           xValue={xValue}
           yValue={yValue}
+          epsilon={epsilon}
         />
       </g>
     </svg>

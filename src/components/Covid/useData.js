@@ -5,12 +5,17 @@ const sum = (accu, current) => accu + current;
 const parseDate = timeParse("%m/%d/%y");
 
 const transform = raw => {
+    const countryData = raw.filter(d => !d['Province/State'])
+
     const days = raw.columns.slice(4);
-    return days.map(day => ({
-        date: parseDate(day),
-        deathTotal: raw.map(d => +d[day]).reduce(sum, 0)
+    return countryData.map(d => {
+        const countryName = d['Country/Region'];
+        return days.map(day => ({
+            date: parseDate(day),
+            deathTotal: +d[day]
+        }))
     })
-    )
+
 };
 
 export const useData = (dataUrl) => {
