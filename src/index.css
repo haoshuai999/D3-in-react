@@ -115,3 +115,7 @@ select option {
 .title {
   font-size: 20px;
 }
+
+.active {
+  stroke: black;
+}

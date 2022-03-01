@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import { scaleTime, scaleLog, extent, max, timeFormat } from 'd3';
-import { useData } from "./useData";
 import { Marks } from './Marks';
 import { LeftAxis } from './LeftAxis';
 import { BottomAxis } from './BottomAxis';
 import { YMarkerline } from './YMarkerline';
+import { VoronoiOverlay } from './VoronoiOverlay';
 
 const width = 960;
 const height = 700;
 const margin = { top: 40, right: 20, bottom: 50, left: 70 };
-
-const dataUrl = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv";
 
 const innerWidth = width - margin.left - margin.right;
 const innerHeight = height - margin.top - margin.bottom;
@@ -22,39 +20,58 @@ const xLabelOffset = 35;
 const yAxisLabel = "Total Number of COVID Deaths";
 const yLabelOffset = 35;
 
-const epsilon = 1
+const epsilon = 1;
 
-const Covid = () => {
-  const data = useData(dataUrl);
+export const Covid = ({ data }) => {
+  const [activeCountry, setActiveCountry] = useState();
 
-  if (!data) {
-    return <pre>Loading...</pre>
-  }
-  const allData = data.reduce((accu, timeSeries) => accu.concat(timeSeries), []);
+  const handleVoronoiHover = useCallback((d) => {
+    console.log(d.countryName)
+    setActiveCountry(d.countryName)
+  }, []);
 
-  const xValue = d => d.date;
+  const allData = useMemo(() => 
+    data.reduce((accu, timeSeries) => accu.concat(timeSeries), [])
+  , [data]);
 
-  const yValue = d => d.deathTotal;
 
-  const xScale = scaleTime()
-    .domain(extent(allData, d => d.date))
-    .range([0, innerWidth])
+  const xValue = useMemo(() => d => d.date, []);
 
-  const yScale = scaleLog()
-    .domain([epsilon, max(allData, d => d.deathTotal)])
-    .range([innerHeight, 0])
+  const yValue = useMemo(() => d => d.deathTotal, []);
 
+  const xScale = useMemo(() => 
+    scaleTime()
+      .domain(extent(allData, xValue))
+      .range([0, innerWidth]), 
+    [allData, innerWidth, xValue]);
+
+  const yScale = useMemo(() => 
+    scaleLog()
+      .domain([epsilon, max(allData, yValue)])
+      .range([innerHeight, 0]),
+    [allData, innerHeight, yValue]);
 
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left},${margin.top})`}>
-        <text 
+        <text
           className='title'
           transform={`translate(${innerWidth / 2}, -10)`}
           textAnchor='middle'
         >
           Global Coronavirus Deaths Over Time By Country
         </text>
+        <VoronoiOverlay
+          onHover={handleVoronoiHover}
+          allData={allData}
+          innerWidth={innerWidth}
+          innerHeight={innerHeight}
+          xScale={xScale}
+          yScale={yScale}
+          xValue={xValue}
+          yValue={yValue}
+          epsilon={epsilon}
+        />
         <BottomAxis
           xScale={xScale}
           innerHeight={innerHeight}
@@ -78,13 +95,14 @@ const Covid = () => {
           y={innerHeight + xLabelOffset}
           textAnchor='middle'
         >{xAxisLabel}</text>
-        <YMarkerline 
-          value={5000000} 
+        <YMarkerline
+          value={5000000}
           yScale={yScale}
           innerWidth={innerWidth}
         />
         <Marks
           data={data}
+          active={activeCountry}
           xScale={xScale}
           yScale={yScale}
           xValue={xValue}
@@ -95,5 +113,3 @@ const Covid = () => {
     </svg>
   )
 }
-
-export default Covid;

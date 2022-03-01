@@ -10,14 +10,14 @@ import BarChart from './components/BarChart/BarChart';
 import ScatterChart from './components/ScatterChart/Iris';
 import Scatter from './components/ScatterMenu/Scatter';
 import LineChart from './components/LineChart/Temparature';
-import Covid from './components/Covid/Covid'
+import CovidData from './components/Covid/CovidData';
 
 ReactDOM.render(
   <React.StrictMode>
     <div className="container">
     <div className="row">
         <div className="col-12 text-center">
-          <Covid />
+          <CovidData />
         </div>
       </div>
       <div className="row">
