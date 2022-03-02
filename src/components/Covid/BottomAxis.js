@@ -10,7 +10,7 @@ export const BottomAxis = ({ xScale, innerHeight, tickFormat, tickOffset = 3 }) 
       xAxisG
         .call(
           xAxis
-          .tickSize(10-innerHeight)
+          .tickSize(-innerHeight)
           .tickPadding([tickOffset])
           .tickFormat(tickFormat)
         )

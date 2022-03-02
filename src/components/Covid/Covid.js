@@ -18,17 +18,14 @@ const xAxisLabel = "Date";
 const xLabelOffset = 35;
 
 const yAxisLabel = "Total Number of COVID Deaths";
-const yLabelOffset = 35;
+const yLabelOffset = 55;
 
-const epsilon = 1;
+const epsilon = 0.1;
 
 export const Covid = ({ data }) => {
-  const [activeCountry, setActiveCountry] = useState();
+  const [activeRow, setActiveRow] = useState();
 
-  const handleVoronoiHover = useCallback((d) => {
-    console.log(d.countryName)
-    setActiveCountry(d.countryName)
-  }, []);
+  const handleVoronoiHover = useCallback(setActiveRow, []);
 
   const allData = useMemo(() => 
     data.reduce((accu, timeSeries) => accu.concat(timeSeries), [])
@@ -71,6 +68,7 @@ export const Covid = ({ data }) => {
           xValue={xValue}
           yValue={yValue}
           epsilon={epsilon}
+          margin={margin}
         />
         <BottomAxis
           xScale={xScale}
@@ -102,12 +100,13 @@ export const Covid = ({ data }) => {
         />
         <Marks
           data={data}
-          active={activeCountry}
+          active={activeRow}
           xScale={xScale}
           yScale={yScale}
           xValue={xValue}
           yValue={yValue}
           epsilon={epsilon}
+          formatDate={xAxisTickFormat}
         />
       </g>
     </svg>

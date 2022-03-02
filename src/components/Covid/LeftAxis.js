@@ -9,7 +9,7 @@ export const LeftAxis = ({yScale, innerWidth, tickOffset= 3}) => {
     yAxisG
       .call(
         yAxis
-        .ticks(10, "~s")
+        .ticks(10, "d")
         .tickSize(-innerWidth)
         .tickPadding([tickOffset])
         //.tickFormat((tickValue) => tickValue)
