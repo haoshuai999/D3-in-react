@@ -11,11 +11,17 @@ import ScatterChart from './components/ScatterChart/Iris';
 import Scatter from './components/ScatterMenu/Scatter';
 import LineChart from './components/LineChart/Temparature';
 import CovidData from './components/Covid/CovidData';
+import Force from './components/Force/Force';
 
 ReactDOM.render(
   <React.StrictMode>
     <div className="container">
     <div className="row">
+        <div className="col-12 text-center">
+          <Force />
+        </div>
+      </div>
+      <div className="row">
         <div className="col-12 text-center">
           <CovidData />
         </div>
