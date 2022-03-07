@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { force } from './generateForce';
 
 const width = 960;
-const height = 500;
+const height = 960;
 
 const Force = () => {
     useEffect(() => {
